@@ -5,10 +5,11 @@
 {% endblock %}
 
 {% block body %}
-    <h1>{{ article.title }}</h1>
     <div class="alert alert-info">
         <h2>{{ article.title }}</h2>
         <p>{{ article.text }}</p>
         <p><b>Дата: {{ article.date.date() }}</b></p>
+        <a class="btn btn-danger" href="/posts/{{ article.id }}/del">Удалить</a>
+        <a class="btn btn-success" href="/posts/{{ article.id }}/update">Редактировать</a>
     </div>
 {% endblock %}

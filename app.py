@@ -2,7 +2,6 @@ from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
-
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -32,19 +31,19 @@ def about():
 
 
 @app.route('/posts')
-def posts():
+def articles_all():
     articles = Article.query.order_by(Article.date.desc()).all()
     return render_template('posts.html', articles=articles)
 
 
 @app.route('/posts/<int:id>')
-def post_detail(id):
+def article_detail(id):
     article = Article.query.get(id)
     return render_template('post_detail.html', article=article)
 
 
 @app.route('/create-article', methods=['POST', 'GET'])
-def create_article():
+def article_create():
     if request.method == 'POST':
         title = request.form['title']
         intro = request.form['intro']
@@ -61,7 +60,33 @@ def create_article():
             return redirect('/posts')
         except:
             return 'При добавлении статьи произошла ошибка'
-    return render_template('create-article.html')
+    return render_template('post-create.html')
+
+
+@app.route('/posts/<int:id>/update', methods=['POST', 'GET'])
+def article_update(id):
+    article = Article.query.get(id)
+    if request.method == 'POST':
+        article.title = request.form['title']
+        article.intro = request.form['intro']
+        article.text = request.form['text']
+        try:
+            db.session.commit()
+            return redirect('/posts')
+        except:
+            return 'При обновлении статьи произошла ошибка'
+    return render_template('post-update.html', article=article)
+
+
+@app.route('/posts/<int:id>/del')
+def article_delete(id):
+    article = Article.query.get_or_404(id)
+    try:
+        db.session.delete(article)
+        db.session.commit()
+        return redirect('/posts')
+    except:
+        return 'При удалении статьи произошла ошибка'
 
 
 # @app.route('/user/<string:name>/<int:id>')
