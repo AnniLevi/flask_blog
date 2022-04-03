@@ -1,0 +1,12 @@
+Запуск проекта
+(в консоли)
+python app.py
+
+Создание бд
+(в консоли):
+python
+from app import db
+db.create_all()
+
+Bootstrap
+https://www.bootstrapcdn.com/

@@ -1,5 +1,4 @@
 .idea
-useful.txt
 *.db
 /venv/
 __pycache__/
