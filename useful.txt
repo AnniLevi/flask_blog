@@ -3,10 +3,22 @@
 python app.py
 
 Создание бд
-(в консоли):
+(в консоли)
 python
 from app import db
 db.create_all()
 
 Bootstrap
 https://www.bootstrapcdn.com/
+
+
+Heroku
+установить Heroku CLI (https://devcenter.heroku.com/articles/heroku-cli)
+
+(в консоли)
+heroku login
+
+создать Procfile
+(в нем указано, что весь проект должен запусться с помощью gunicorn
+и основное приложение запускается из файла app.py)
+
