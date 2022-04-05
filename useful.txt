@@ -15,10 +15,13 @@ https://www.bootstrapcdn.com/
 Heroku
 установить Heroku CLI (https://devcenter.heroku.com/articles/heroku-cli)
 
-(в консоли)
-heroku login
-
 создать Procfile
 (в нем указано, что весь проект должен запусться с помощью gunicorn
 и основное приложение запускается из файла app.py)
 
+Деплой на heroku с использованием heroku git и heroku cli (в консоли):
+heroku login
+heroku git:remote -a flask-blog-f
+git push heroku main
+
+heroku выдал ссылку для сайта https://flask-blog-f.herokuapp.com/
